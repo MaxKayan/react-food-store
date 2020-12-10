@@ -2,11 +2,19 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const arr = [1, 2, 3];
-  const multy = (x, y, z) => x * y * z;
+  const sleep = (ms) =>
+    new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
 
-  console.log(multy(...arr));
-  console.log(arr);
+  sleep(3000)
+    .then((value) => {
+      console.log("Done", value);
+    })
+    .catch((reason) => {
+      console.log(reason);
+    })
+    .finally();
 
   return (
     <div className="App">
