@@ -2,6 +2,12 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  const arr = [1, 2, 3];
+  const multy = (x, y, z) => x * y * z;
+
+  console.log(multy(...arr));
+  console.log(arr);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -13,7 +19,8 @@ function App() {
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           Learn React
         </a>
       </header>
