@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import { NavBar } from "./components";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -18,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Roboto, sans-serif;
     font-size: 20px;
     color: black;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 
   a {
@@ -40,12 +46,10 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyle />
-      <div className="App">
-        <h1>Hello React</h1>
-      </div>
-    </div>
+      <NavBar />
+    </>
   );
 }
 
