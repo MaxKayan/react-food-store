@@ -11,7 +11,7 @@ const NavBarStyled = styled.header`
   top: 0;
   left: 0;
   z-index: 999;
-  height: 80px;
+  height: ${({ theme }) => theme.navBarHeight};
   width: 100vw;
   display: flex;
   justify-content: space-between;
