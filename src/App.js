@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { NavBar } from "./components";
+import { Menu, NavBar, ThemeProvider } from "./components";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -52,7 +52,10 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <NavBar />
+      <ThemeProvider themeData={{ primaryColor: "#FFF" }}>
+        <NavBar />
+        <Menu />
+      </ThemeProvider>
     </>
   );
 }
