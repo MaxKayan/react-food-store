@@ -14,9 +14,15 @@ const MenuSection = styled.section`
   padding: 30px;
 `;
 
+const Banner = styled.img`
+  width: 100%;
+`;
+
 export default function Menu() {
   return (
     <MenuStyled>
+      <Banner src={process.env.PUBLIC_URL + "/banner.png"} alt="Banner" />
+
       <MenuSection>
         <h2>Бургеры</h2>
         <ItemList dataList={mockMenuData.burger} />
