@@ -16,12 +16,13 @@ const MenuSection = styled.section`
 
 const Banner = styled.img`
   width: 100%;
+  max-height: 300px;
 `;
 
 export default function Menu() {
   return (
     <MenuStyled>
-      <Banner src={process.env.PUBLIC_URL + "/banner.png"} alt="Banner" />
+      <Banner src={"/banner.png"} alt="Banner" />
 
       <MenuSection>
         <h2>Бургеры</h2>
