@@ -11,17 +11,19 @@ const StyledButton = styled.button`
   outline: none;
   height: inherit;
   background-color: ${addBtnColor};
-  border-radius: 25px;
+  border-radius: 9999px;
   padding: 5px 15px;
   cursor: pointer;
 
   box-shadow: 0 0 20px -5px ${addBtnColor};
 
+  /* Tex Font */
   font-family: "Jura", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
+  padding-bottom: 10px;
 
   :active {
     background-color: ${addBtnColorDark};
@@ -30,12 +32,6 @@ const StyledButton = styled.button`
   :hover {
     border: ${addBtnBorderWidth} solid ${addBtnColor};
     box-shadow: 0 0 20px 0 ${addBtnColor};
-  }
-
-  span {
-    text-transform: uppercase;
-    color: white;
-    font-size: 20px;
   }
 `;
 
