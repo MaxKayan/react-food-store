@@ -1,6 +1,6 @@
-import { transparentize } from "polished";
 import React from "react";
 import styled from "styled-components";
+import { SuccessButton } from ".";
 import { toLocalePrice } from "../utils/helpers";
 
 const Overlay = styled.div`
@@ -37,51 +37,12 @@ const Banner = styled.div`
   background-size: cover;
 `;
 
-const addBtnColor = "#06ce06";
-const addBtnColorDark = "#04ae04";
-const addBtnBorderWidth = "0px";
-const addBtnShadowOpacity = 0;
-
-const AddButton = styled.button`
-  transition: 0.15s;
+const OffsetBlock = styled.div`
   position: absolute;
   left: 50%;
   top: -25px;
-  border: ${addBtnBorderWidth} solid ${addBtnColor};
-  outline: none;
-  height: 50px;
-  background-color: ${addBtnColor};
   transform: translateX(-50%);
-  border-radius: 25px;
-  padding: 5px 15px;
-  cursor: pointer;
-
-  box-shadow: 0 0 20px -5px ${transparentize(addBtnShadowOpacity, addBtnColor)};
-
-  text-transform: uppercase;
-  color: white;
-  font-size: 20px;
-
-  :active {
-    /* border: none; */
-    background-color: ${addBtnColorDark};
-  }
-
-  :focus {
-  }
-
-  :hover {
-    /* color: ${addBtnColor}; */
-    /* background-color: white; */
-    border: ${addBtnBorderWidth} solid ${addBtnColor};
-    box-shadow: 0 0 20px 0 ${transparentize(addBtnShadowOpacity, addBtnColor)};
-  }
-
-  span {
-    text-transform: uppercase;
-    color: white;
-    font-size: 20px;
-  }
+  height: 50px;
 `;
 
 const Container = styled.div`
@@ -103,12 +64,15 @@ export default function ItemModal({ item, setOpenedItem }) {
         <Modal
           onClick={(ev) => {
             ev.stopPropagation();
-            console.log("Modal click");
           }}
         >
           <Banner src={item.img} />
           <Container>
-            <AddButton>Добавить</AddButton>
+            <OffsetBlock>
+              <SuccessButton onClick={(ev) => console.log(ev)}>
+                Добавить
+              </SuccessButton>
+            </OffsetBlock>
             <div className="item-modal-info">
               <h3>{item.name}</h3>
               <h3>{toLocalePrice(item.price)}</h3>
