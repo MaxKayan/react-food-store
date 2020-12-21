@@ -22,6 +22,7 @@
   "rules": {
     "react/prop-types": 0,
     "indent": ["warn", 2],
+    // "indent": 0,
     // "linebreak-style": [
     //   "warn",
     //   "windows",

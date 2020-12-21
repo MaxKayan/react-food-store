@@ -8,10 +8,12 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
+  transition: 0.3s;
   position: relative;
   width: 400px;
   height: 155px;
   background-image: ${({ img }) => `url(${img})`};
+  box-shadow: inset 0 0 50px 30px rgba(0, 0, 0, 0.1);
   background-position: center;
   background-size: cover;
   margin: 30px;
@@ -21,6 +23,7 @@ const Item = styled.li`
   z-index: 1;
 
   &:after {
+    transition: 0.3s;
     content: "";
     position: absolute;
     top: 0;
@@ -41,12 +44,17 @@ const Item = styled.li`
   }
 `;
 
-export default function ItemList({ dataList }) {
-  console.log("dataList: ", dataList);
+export default function ItemList({ dataList, setOpenedItem }) {
   return (
     <List>
       {dataList.map((item) => (
-        <Item key={item.id} img={item.img}>
+        <Item
+          key={item.id}
+          img={item.img}
+          onClick={() => {
+            setOpenedItem(item);
+          }}
+        >
           <p>{item.name}</p>
           <p>
             {item.price.toLocaleString("ru-RU", {

@@ -1,18 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
-import foodLogo from "../svg/logo.svg";
 
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import { Tooltip } from ".";
+import { Tooltip } from "..";
 
 const NavBarStyled = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  right: 0;
+  z-index: 100;
   height: ${({ theme }) => theme.navBarHeight};
-  width: 100vw;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0.5rem 1rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +56,7 @@ export default function NavBar() {
   return (
     <NavBarStyled>
       <Logo>
-        <BrandLogo src={foodLogo} alt="logo" />
+        <BrandLogo src="/svg/logo.svg" alt="logo" />
         <BrandTitle>MrDonald&apos;s</BrandTitle>
       </Logo>
       <Tooltip text="Войти">
