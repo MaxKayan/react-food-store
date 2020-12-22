@@ -1,29 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import { baseButton } from "../utils/styledComponents";
 
 const addBtnColor = "#06ce06";
 const addBtnColorDark = "#04ae04";
 const addBtnBorderWidth = "0px";
 
-const StyledButton = styled.button`
+const StyledButton = styled(baseButton)`
   transition: 0.15s;
   border: ${addBtnBorderWidth} solid ${addBtnColor};
-  outline: none;
-  height: inherit;
+  height: 50px;
   background-color: ${addBtnColor};
   border-radius: 9999px;
-  padding: 5px 15px;
-  cursor: pointer;
+  padding: 0 20px;
 
   box-shadow: 0 0 20px -5px ${addBtnColor};
 
-  /* Tex Font */
+  /* Text Font */
   font-family: "Jura", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   color: white;
   font-size: 25px;
-  padding-bottom: 10px;
+  padding-bottom: 3px;
 
   :active {
     background-color: ${addBtnColorDark};

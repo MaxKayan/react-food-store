@@ -1,10 +1,11 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle, Menu, NavBar } from "./components";
+import { GlobalStyle, Menu, NavBar, OrderSideBar } from "./components";
 
 const theme = {
   // primaryColor: "#FFF",
   navBarHeight: "80px",
+  sideBarWidth: "380px",
 };
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <NavBar />
+        <OrderSideBar />
         <Menu />
       </ThemeProvider>
     </>

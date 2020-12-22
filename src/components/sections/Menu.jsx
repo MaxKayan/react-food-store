@@ -8,6 +8,7 @@ const MenuStyled = styled.main`
   /* background-color: #ccc; */
   background-color: #f0f0f0;
   margin-top: ${({ theme }) => theme.navBarHeight};
+  margin-left: ${(props) => props.theme.sideBarWidth};
   min-height: 500px;
 `;
 

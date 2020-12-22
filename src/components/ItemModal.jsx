@@ -43,6 +43,10 @@ const OffsetBlock = styled.div`
   top: -25px;
   transform: translateX(-50%);
   height: 50px;
+
+  button {
+    height: inherit;
+  }
 `;
 
 const Container = styled.div`
