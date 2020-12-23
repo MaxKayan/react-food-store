@@ -4,6 +4,8 @@ import styled from "styled-components";
 import TrashIcon from "../svg/trash.svg";
 import { baseButton } from "../utils/styledComponents";
 
+import { toLocalePrice } from "../utils/helpers";
+
 const OrderItem = styled.li`
   display: flex;
   margin: 15px 0;
@@ -28,13 +30,20 @@ const TrashButton = styled(baseButton)`
   background-size: cover;
 `;
 
-export default function OrderListItem() {
-  return (
+export default function OrderListItem({ orderItem }) {
+  if (!orderItem) return null;
+
+  const {
+    item: { name, price },
+    quantity,
+  } = orderItem;
+
+  return orderItem ? (
     <OrderItem>
-      <ItemName>JS Burger</ItemName>
-      <span>2</span>
-      <ItemPrice>750</ItemPrice>
+      <ItemName>{name}</ItemName>
+      <span>{quantity}</span>
+      <ItemPrice>{toLocalePrice(price)}</ItemPrice>
       <TrashButton />
     </OrderItem>
-  );
+  ) : null;
 }

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ItemList, ItemModal } from "..";
+import { useItemOpen } from "../../hooks";
 
 import * as mockMenuData from "../../json/DBMenu.json";
 
@@ -21,9 +22,8 @@ const Banner = styled.img`
   max-height: 300px;
 `;
 
-export default function Menu() {
-  const [openedItem, setOpenedItem] = useState(null);
-  console.log("openedItem: ", openedItem);
+export default function Menu(props) {
+  const openedItem = useItemOpen();
 
   return (
     <MenuStyled>
@@ -31,18 +31,15 @@ export default function Menu() {
 
       <MenuSection>
         <h2>Бургеры</h2>
-        <ItemList
-          dataList={mockMenuData.burger}
-          setOpenedItem={setOpenedItem}
-        />
+        <ItemList dataList={mockMenuData.burger} {...openedItem} />
       </MenuSection>
 
       <MenuSection>
         <h2>Закуски / Напитки</h2>
-        <ItemList dataList={mockMenuData.other} setOpenedItem={setOpenedItem} />
+        <ItemList dataList={mockMenuData.other} {...openedItem} />
       </MenuSection>
 
-      <ItemModal item={openedItem} setOpenedItem={setOpenedItem} />
+      <ItemModal {...openedItem} {...props} />
     </MenuStyled>
   );
 }

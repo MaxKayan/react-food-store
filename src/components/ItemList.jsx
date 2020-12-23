@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { toLocalePrice } from "../utils/helpers";
 
 const List = styled.ul`
   display: flex;
@@ -56,12 +57,7 @@ export default function ItemList({ dataList, setOpenedItem }) {
           }}
         >
           <p>{item.name}</p>
-          <p>
-            {item.price.toLocaleString("ru-RU", {
-              style: "currency",
-              currency: "RUB",
-            })}
-          </p>
+          <p>{toLocalePrice(item.price)}</p>
         </Item>
       ))}
     </List>

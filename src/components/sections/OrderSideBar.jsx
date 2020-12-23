@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { OrderListItem, SuccessButton } from "../components";
+import { OrderListItem, SuccessButton } from "..";
 
 const SideBar = styled.section`
   display: flex;
@@ -43,16 +43,26 @@ const TotalPrice = styled.span`
   margin-left: 25px;
 `;
 
-export default function OrderSideBar() {
+const EmptyListMessage = styled.p`
+  text-align: center;
+`;
+
+export default function OrderSideBar({ orderItems }) {
+  console.log("orderItems: ", orderItems);
+
   return (
     <SideBar>
       <Title>Ваш заказ</Title>
       <Content>
-        <OrdersList>
-          <OrderListItem />
-          <OrderListItem />
-          <OrderListItem />
-        </OrdersList>
+        {orderItems.length ? (
+          <OrdersList>
+            {orderItems.map((item, index) => (
+              <OrderListItem key={index} orderItem={item} />
+            ))}
+          </OrdersList>
+        ) : (
+          <EmptyListMessage>Список заказов пуст</EmptyListMessage>
+        )}
       </Content>
       <Total>
         <span>Итого</span>

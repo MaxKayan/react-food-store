@@ -61,25 +61,37 @@ const Container = styled.div`
   }
 `;
 
-export default function ItemModal({ item, setOpenedItem }) {
+export default function ItemModal({
+  openedItem,
+  setOpenedItem,
+  // orderItems,
+  // setOrderItems,
+  addOrderItem,
+}) {
+  console.log("openedItem: ", openedItem);
+
+  const addToOrder = () => {
+    const order = {
+      item: openedItem,
+      quantity: 1,
+    };
+
+    addOrderItem(order);
+    setOpenedItem(null);
+  };
+
   return (
-    <Overlay open={item !== null} onClick={() => setOpenedItem(null)}>
-      {item ? (
-        <Modal
-          onClick={(ev) => {
-            ev.stopPropagation();
-          }}
-        >
-          <Banner src={item.img} />
+    <Overlay open={openedItem} onClick={() => setOpenedItem(null)}>
+      {openedItem ? (
+        <Modal onClick={(ev) => ev.stopPropagation()}>
+          <Banner src={openedItem.img} />
           <Container>
             <OffsetBlock>
-              <SuccessButton onClick={(ev) => console.log(ev)}>
-                Добавить
-              </SuccessButton>
+              <SuccessButton onClick={addToOrder}>Добавить</SuccessButton>
             </OffsetBlock>
             <div className="item-modal-info">
-              <h3>{item.name}</h3>
-              <h3>{toLocalePrice(item.price)}</h3>
+              <h3>{openedItem.name}</h3>
+              <h3>{toLocalePrice(openedItem.price)}</h3>
             </div>
           </Container>
         </Modal>
