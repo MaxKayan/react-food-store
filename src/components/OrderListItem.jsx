@@ -34,15 +34,15 @@ export default function OrderListItem({ orderItem }) {
   if (!orderItem) return null;
 
   const {
-    item: { name, price },
-    quantity,
+    item: { name },
+    count,
   } = orderItem;
 
   return orderItem ? (
     <OrderItem>
       <ItemName>{name}</ItemName>
-      <span>{quantity}</span>
-      <ItemPrice>{toLocalePrice(price)}</ItemPrice>
+      <span>{count}</span>
+      <ItemPrice>{toLocalePrice(orderItem.getTotalPrice())}</ItemPrice>
       <TrashButton />
     </OrderItem>
   ) : null;

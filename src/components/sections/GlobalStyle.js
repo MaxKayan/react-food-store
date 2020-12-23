@@ -42,6 +42,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   input, button {
-    font-family: inherit;
+    font: inherit;
+  }
+
+  /* input[type="number"], */
+  input::-webkit-inner-spin-button,
+  input::-webkit-outer-spin-button {
+    appearance: none;
   }
 `;

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { SuccessButton } from ".";
+import { ItemCount, SuccessButton } from ".";
+import { useItemCount } from "../hooks";
+import { OrderItem } from "../models/OrderItem";
 import { toLocalePrice } from "../utils/helpers";
 
 const Overlay = styled.div`
@@ -52,7 +54,6 @@ const OffsetBlock = styled.div`
 const Container = styled.div`
   position: relative;
   padding: 1.5rem;
-  text-align: center;
 
   .item-modal-info {
     display: flex;
@@ -61,6 +62,14 @@ const Container = styled.div`
   }
 `;
 
+const TotalPriceItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+`;
+
+export const getTotalPrice = (order) => order.item.price * order.count;
+
 export default function ItemModal({
   openedItem,
   setOpenedItem,
@@ -68,15 +77,17 @@ export default function ItemModal({
   // setOrderItems,
   addOrderItem,
 }) {
-  console.log("openedItem: ", openedItem);
+  const counter = useItemCount();
+
+  // const order = {
+  //   item: openedItem,
+  //   count: counter.itemCount,
+  // };
+
+  const orderItem = new OrderItem(openedItem, counter.itemCount);
 
   const addToOrder = () => {
-    const order = {
-      item: openedItem,
-      quantity: 1,
-    };
-
-    addOrderItem(order);
+    addOrderItem(orderItem);
     setOpenedItem(null);
   };
 
@@ -93,6 +104,13 @@ export default function ItemModal({
               <h3>{openedItem.name}</h3>
               <h3>{toLocalePrice(openedItem.price)}</h3>
             </div>
+
+            <ItemCount {...counter} />
+
+            <TotalPriceItem>
+              <span>Итого:</span>
+              <span>{toLocalePrice(orderItem.getTotalPrice())}</span>
+            </TotalPriceItem>
           </Container>
         </Modal>
       ) : null}

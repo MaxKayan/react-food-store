@@ -7,3 +7,4 @@ export { default as ItemModal } from "./ItemModal";
 export { default as Tooltip } from "./Tooltip";
 export { default as OrderSideBar } from "./sections/OrderSideBar";
 export { default as OrderListItem } from "./OrderListItem";
+export { default as ItemCount } from "./ItemCount";

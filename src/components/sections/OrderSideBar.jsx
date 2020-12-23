@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { OrderListItem, SuccessButton } from "..";
+import { getTotalPrice } from "../ItemModal";
 
 const SideBar = styled.section`
   display: flex;
@@ -50,6 +51,11 @@ const EmptyListMessage = styled.p`
 export default function OrderSideBar({ orderItems }) {
   console.log("orderItems: ", orderItems);
 
+  const total = orderItems.reduce(
+    (prev, item) => item.getTotalPrice() + prev,
+    0
+  );
+
   return (
     <SideBar>
       <Title>Ваш заказ</Title>
@@ -67,7 +73,7 @@ export default function OrderSideBar({ orderItems }) {
       <Total>
         <span>Итого</span>
         <span>5</span>
-        <TotalPrice>850 Р</TotalPrice>
+        <TotalPrice>{total}</TotalPrice>
       </Total>
       <SuccessButton>Оформить</SuccessButton>
     </SideBar>
