@@ -39,7 +39,7 @@ export default function Menu(props) {
         <ItemList dataList={mockMenuData.other} {...openedItem} />
       </MenuSection>
 
-      <ItemModal {...openedItem} {...props} />
+      {openedItem.openedItem && <ItemModal {...openedItem} {...props} />}
     </MenuStyled>
   );
 }

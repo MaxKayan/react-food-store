@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { OrderListItem, SuccessButton } from "..";
+import { toLocalePrice } from "../../utils/helpers";
 
 const SideBar = styled.section`
   display: flex;
@@ -74,7 +75,7 @@ export default function OrderSideBar({ orderItems }) {
       <Total>
         <span>Итого</span>
         <span>{totalCount}</span>
-        <TotalPrice>{totalPrice}</TotalPrice>
+        <TotalPrice>{toLocalePrice(totalPrice)}</TotalPrice>
       </Total>
       <SuccessButton>Оформить</SuccessButton>
     </SideBar>

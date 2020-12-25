@@ -4,6 +4,8 @@ import { ItemCount, SuccessButton } from ".";
 import { useItemCount } from "../hooks";
 import { OrderItem } from "../models/OrderItem";
 import { toLocalePrice } from "../utils/helpers";
+import ToppingsList from "./ToppingsList";
+import useToppings from "../hooks/useToppings";
 
 const Overlay = styled.div`
   transition: 0.3s;
@@ -15,7 +17,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, ${(props) => (props.open ? 0.5 : 0)});
+  background-color: rgba(0, 0, 0, ${({ open }) => (open ? 0.5 : 0)});
   z-index: 120;
   pointer-events: ${({ open }) => (open ? "auto" : "none")};
 `;
@@ -27,7 +29,7 @@ const Modal = styled.div`
   height: 600px;
   overflow: hidden;
   /* box-shadow: 0 3px 9px 10px rgba(0, 0, 0, 0.2); */
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0.5rem 1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0.5rem 1rem;
   margin: 1.5rem;
   /* z-index: 200; */
 `;
@@ -68,23 +70,30 @@ const TotalPriceItem = styled.div`
   margin-top: 1.5rem;
 `;
 
-export const getTotalPrice = (order) => order.item.price * order.count;
+/**
+ *
+ * @param {{name:string, img:string, id:int, price:int, toppings:string[]}} openedItem
+ * @param setOpenedItem
+ * @param addOrderItem
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function ItemModal(
+  {
+    openedItem,
+    setOpenedItem,
+    addOrderItem
+  }) {
 
-export default function ItemModal({
-  openedItem,
-  setOpenedItem,
-  // orderItems,
-  // setOrderItems,
-  addOrderItem,
-}) {
   const counter = useItemCount();
+  const toppingsHub = useToppings(openedItem);
 
   // const order = {
   //   item: openedItem,
   //   count: counter.itemCount,
   // };
 
-  const orderItem = new OrderItem(openedItem, counter.itemCount);
+  const orderItem = new OrderItem(openedItem, counter.itemCount, toppingsHub.toppings);
 
   const addToOrder = () => {
     addOrderItem(orderItem);
@@ -106,6 +115,8 @@ export default function ItemModal({
             </div>
 
             <ItemCount {...counter} />
+
+            {openedItem.toppings && <ToppingsList {...toppingsHub} />}
 
             <TotalPriceItem>
               <span>Итого:</span>

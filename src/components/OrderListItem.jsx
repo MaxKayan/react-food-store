@@ -13,6 +13,7 @@ const OrderItem = styled.li`
 
 const ItemName = styled.span`
   flex-grow: 1;
+  max-width: 210px;
 `;
 
 const ItemPrice = styled.span`
@@ -30,17 +31,36 @@ const TrashButton = styled(baseButton)`
   background-size: cover;
 `;
 
+const ToppingName = styled.span`
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 15px;
+  color: gray;
+`;
+
 export default function OrderListItem({ orderItem }) {
   if (!orderItem) return null;
 
   const {
     item: { name },
-    count,
+    count
   } = orderItem;
 
   return orderItem ? (
     <OrderItem>
-      <ItemName>{name}</ItemName>
+      <ItemName>
+        {name}
+        {orderItem.toppings && (
+          <div>
+            {orderItem.toppings.map((item, i) => (
+              item.checked &&
+              <ToppingName key={i}>
+                {item.name}
+              </ToppingName>
+            ))}
+          </div>
+        )}
+      </ItemName>
       <span>{count}</span>
       <ItemPrice>{toLocalePrice(orderItem.getTotalPrice())}</ItemPrice>
       <TrashButton />
