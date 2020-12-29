@@ -9,6 +9,11 @@ import { toLocalePrice } from "../../utils/helpers";
 const ListItem = styled.li`
   display: flex;
   margin: 15px 0;
+  
+  &:hover {
+    background-color: aliceblue;
+    cursor: pointer;
+  }
 `;
 
 const ItemName = styled.span`
@@ -46,11 +51,20 @@ const ToppingName = styled.span`
 /**
  *
  * @param {OrderItem} orderItem
+ * @param orderId
  * @param {removeOrderItem} removeOrderItem
+ * @param {function} setOpenedItem
  * @returns {null|JSX.Element}
  * @constructor
  */
-export default function OrderListItem({ orderItem, removeOrderItem }) {
+export default function OrderListItem(
+  {
+    orderItem,
+    orderId,
+    removeOrderItem,
+    setOpenedItem
+  }
+) {
   if (!orderItem) return null;
 
   const {
@@ -58,8 +72,16 @@ export default function OrderListItem({ orderItem, removeOrderItem }) {
     count
   } = orderItem;
 
+  const editOrderItem = () => {
+    setOpenedItem({
+      ...item,
+      orderId,
+      orderItem
+    });
+  };
+
   return orderItem ? (
-    <ListItem>
+    <ListItem onClick={editOrderItem}>
       <ItemName>
         {item.name} {orderItem.choice}
         {orderItem.toppings && (
@@ -75,7 +97,8 @@ export default function OrderListItem({ orderItem, removeOrderItem }) {
       </ItemName>
       <span>{count}</span>
       <ItemPrice>{toLocalePrice(orderItem.getTotalPrice())}</ItemPrice>
-      <TrashButton onClick={() => {
+      <TrashButton onClick={(ev) => {
+        ev.stopPropagation();
         removeOrderItem(orderItem);
       }} />
     </ListItem>

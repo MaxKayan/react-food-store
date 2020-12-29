@@ -48,8 +48,9 @@ const EmptyListMessage = styled.p`
   text-align: center;
 `;
 
-export default function OrderSideBar({ hook }) {
-  const { orderItems, removeOrderItem } = hook;
+export default function OrderSideBar({ orderItemsHook, openedItemHook }) {
+  const { orderItems, removeOrderItem } = orderItemsHook;
+  const { setOpenedItem } = openedItemHook;
 
   const totalPrice = orderItems.reduce(
     (prev, item) => item.getTotalPrice() + prev,
@@ -67,8 +68,10 @@ export default function OrderSideBar({ hook }) {
             {orderItems.map((item, index) => (
               <OrderListItem
                 key={index}
+                orderId={index}
                 orderItem={item}
                 removeOrderItem={removeOrderItem}
+                setOpenedItem={setOpenedItem}
               />
             ))}
           </OrdersList>

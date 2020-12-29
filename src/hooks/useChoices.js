@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function UseChoices(openedItem) {
+export default function useChoices(openedItem) {
   const [choice, setChoice] = useState(null);
 
   const changeChoice = (ev) => {

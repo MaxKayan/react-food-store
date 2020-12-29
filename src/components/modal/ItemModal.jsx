@@ -68,11 +68,14 @@ const TotalPriceItem = styled.div`
   margin-top: 1.5rem;
 `;
 
+
 /**
  *
- * @param {{name:string, img:string, id:int, price:int, toppings:string[], choices:string[]}} openedItem
+ * @param {{name:string, orderId:int, img:string, id:int, price:int, toppings:string[], choices:string[]}} openedItem
+ * @param setToppings
  * @param setOpenedItem
  * @param addOrderItem
+ * @param updateOrderItem
  * @returns {JSX.Element}
  * @constructor
  */
@@ -80,12 +83,15 @@ export default function ItemModal(
   {
     openedItem,
     setOpenedItem,
-    addOrderItem
+    addOrderItem,
+    updateOrderItem
   }) {
 
-  const counterHook = useItemCount();
+  const counterHook = useItemCount(openedItem);
   const toppingsHook = useToppings(openedItem);
   const choicesHook = useChoices(openedItem);
+
+  const isEdited = openedItem.orderId > -1;
 
   const orderItem = new OrderItem(
     openedItem,
@@ -99,6 +105,11 @@ export default function ItemModal(
     setOpenedItem(null);
   };
 
+  const updateOrder = () => {
+    updateOrderItem(orderItem);
+    setOpenedItem(null);
+  };
+
   return (
     <Overlay open={openedItem} onClick={() => setOpenedItem(null)}>
       {openedItem ? (
@@ -108,9 +119,11 @@ export default function ItemModal(
 
             <OffsetBlock>
               <SuccessButton
-                onClick={addToOrder}
+                onClick={isEdited ? updateOrder : addToOrder}
                 disabled={openedItem.choices && !orderItem.choice}
-              >Добавить</SuccessButton>
+              >
+                {isEdited ? "Сохранить" : "Добавить"}
+              </SuccessButton>
             </OffsetBlock>
 
             <div className="item-modal-info">

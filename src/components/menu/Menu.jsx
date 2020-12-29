@@ -22,24 +22,22 @@ const Banner = styled.img`
   max-height: 300px;
 `;
 
-export default function Menu(props) {
-  const openedItem = useItemOpen();
-
+export default function Menu({ openedItemHook, orderItemsHook }) {
   return (
     <MenuStyled>
       <Banner src={"/banner.png"} alt="Banner" />
 
       <MenuSection>
         <h2>Бургеры</h2>
-        <ItemList dataList={mockMenuData.burger} {...openedItem} />
+        <ItemList dataList={mockMenuData.burger} {...openedItemHook} />
       </MenuSection>
 
       <MenuSection>
         <h2>Закуски / Напитки</h2>
-        <ItemList dataList={mockMenuData.other} {...openedItem} />
+        <ItemList dataList={mockMenuData.other} {...openedItemHook} />
       </MenuSection>
 
-      {openedItem.openedItem && <ItemModal {...openedItem} {...props} />}
+      {openedItemHook.openedItem && <ItemModal {...openedItemHook} {...orderItemsHook} />}
     </MenuStyled>
   );
 }

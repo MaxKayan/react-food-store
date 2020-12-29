@@ -20,5 +20,11 @@ export default function useOrderItems() {
     setOrderItems(newArray);
   };
 
-  return { orderItems, setOrderItems, addOrderItem, removeOrderItem };
+  const updateOrderItem = (item, index) => {
+    const newArray = [...orderItems];
+    newArray[index] = item;
+    setOrderItems(newArray);
+  };
+
+  return { orderItems, setOrderItems, addOrderItem, updateOrderItem, removeOrderItem };
 }

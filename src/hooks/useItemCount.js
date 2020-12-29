@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-export default function useItemCount() {
-  const [itemCount, setItemCount] = useState(1);
+export default function useItemCount(openedItem) {
+  console.log(openedItem);
+  const value = openedItem && openedItem.orderItem ? openedItem.orderItem.count : 1;
+  const [itemCount, setItemCount] = useState(value);
 
   const countUp = () => {
     setItemCount(itemCount + 1);

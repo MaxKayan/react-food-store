@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, Menu, NavBar, OrderSideBar } from "./components";
-import { useOrderItems } from "./hooks";
+import { useItemOpen, useOrderItems } from "./hooks";
 
 const theme = {
   // primaryColor: "#FFF",
@@ -10,6 +10,7 @@ const theme = {
 };
 
 function App() {
+  const openedItemHook = useItemOpen();
   const orderItemsHook = useOrderItems();
 
   return (
@@ -17,8 +18,14 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <NavBar />
-        <OrderSideBar hook={orderItemsHook} />
-        <Menu {...orderItemsHook} />
+        <OrderSideBar
+          openedItemHook={openedItemHook}
+          orderItemsHook={orderItemsHook}
+        />
+        <Menu
+          openedItemHook={openedItemHook}
+          orderItemsHook={orderItemsHook}
+        />
       </ThemeProvider>
     </>
   );

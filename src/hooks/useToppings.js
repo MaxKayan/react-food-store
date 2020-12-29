@@ -5,12 +5,12 @@ const initToppings = toppings => toppings && toppings.map(topping => ({
   checked: false
 }));
 
-export default function UseToppings(openedItem) {
-  const [toppings, setToppings] = useState(initToppings(openedItem.toppings));
+export default function useToppings(openedItem) {
+  const value = openedItem && openedItem.orderItem ?
+    openedItem.orderItem.toppings :
+    initToppings(openedItem.toppings);
 
-  // if (openedItem && !toppings.length) {
-  //   setToppings(initToppings(openedItem.toppings));
-  // }
+  const [toppings, setToppings] = useState(value);
 
   const checkToppings = index => {
     setToppings(toppings.map((item, i) => {
