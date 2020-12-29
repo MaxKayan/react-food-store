@@ -106,7 +106,7 @@ export default function ItemModal(
   };
 
   const updateOrder = () => {
-    updateOrderItem(orderItem);
+    updateOrderItem(orderItem, openedItem.orderId);
     setOpenedItem(null);
   };
 
