@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import TrashIcon from "../svg/trash.svg";
-import { baseButton } from "../utils/styledComponents";
+import TrashIcon from "../../svg/trash.svg";
+import { baseButton } from "../../utils/styledComponents";
 
-import { toLocalePrice } from "../utils/helpers";
+import { toLocalePrice } from "../../utils/helpers";
 
-const OrderItem = styled.li`
+const ListItem = styled.li`
   display: flex;
   margin: 15px 0;
 `;
@@ -38,24 +38,36 @@ const ToppingName = styled.span`
   color: gray;
 `;
 
-export default function OrderListItem({ orderItem }) {
+/**
+ * @callback removeOrderItem
+ * @param {OrderItem} item
+ */
+
+/**
+ *
+ * @param {OrderItem} orderItem
+ * @param {removeOrderItem} removeOrderItem
+ * @returns {null|JSX.Element}
+ * @constructor
+ */
+export default function OrderListItem({ orderItem, removeOrderItem }) {
   if (!orderItem) return null;
 
   const {
-    item: { name },
+    item,
     count
   } = orderItem;
 
   return orderItem ? (
-    <OrderItem>
+    <ListItem>
       <ItemName>
-        {name}
+        {item.name} {orderItem.choice}
         {orderItem.toppings && (
           <div>
-            {orderItem.toppings.map((item, i) => (
-              item.checked &&
+            {orderItem.toppings.map((topping, i) => (
+              topping.checked &&
               <ToppingName key={i}>
-                {item.name}
+                {topping.name}
               </ToppingName>
             ))}
           </div>
@@ -63,7 +75,9 @@ export default function OrderListItem({ orderItem }) {
       </ItemName>
       <span>{count}</span>
       <ItemPrice>{toLocalePrice(orderItem.getTotalPrice())}</ItemPrice>
-      <TrashButton />
-    </OrderItem>
+      <TrashButton onClick={() => {
+        removeOrderItem(orderItem);
+      }} />
+    </ListItem>
   ) : null;
 }

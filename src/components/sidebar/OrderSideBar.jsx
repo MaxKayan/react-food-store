@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { OrderListItem, SuccessButton } from "..";
+import { OrderListItem, SuccessButton } from "../index";
 import { toLocalePrice } from "../../utils/helpers";
 
 const SideBar = styled.section`
@@ -48,8 +48,8 @@ const EmptyListMessage = styled.p`
   text-align: center;
 `;
 
-export default function OrderSideBar({ orderItems }) {
-  console.log("orderItems: ", orderItems);
+export default function OrderSideBar({ hook }) {
+  const { orderItems, removeOrderItem } = hook;
 
   const totalPrice = orderItems.reduce(
     (prev, item) => item.getTotalPrice() + prev,
@@ -65,7 +65,11 @@ export default function OrderSideBar({ orderItems }) {
         {orderItems.length ? (
           <OrdersList>
             {orderItems.map((item, index) => (
-              <OrderListItem key={index} orderItem={item} />
+              <OrderListItem
+                key={index}
+                orderItem={item}
+                removeOrderItem={removeOrderItem}
+              />
             ))}
           </OrdersList>
         ) : (

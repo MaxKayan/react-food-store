@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ItemList, ItemModal } from "..";
+import { ItemList, ItemModal } from "../index";
 import { useItemOpen } from "../../hooks";
 
 import * as mockMenuData from "../../json/DBMenu.json";

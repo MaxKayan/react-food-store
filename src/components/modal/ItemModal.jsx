@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { ItemCount, SuccessButton } from ".";
-import { useItemCount } from "../hooks";
-import { OrderItem } from "../models/OrderItem";
-import { toLocalePrice } from "../utils/helpers";
-import ToppingsList from "./ToppingsList";
-import useToppings from "../hooks/useToppings";
+import { ItemCount, SuccessButton, ToppingsList, Choices } from "../index";
+import { useItemCount, useToppings, useChoices } from "../../hooks";
+import { OrderItem } from "../../models/OrderItem";
+import { toLocalePrice } from "../../utils/helpers";
 
 const Overlay = styled.div`
   transition: 0.3s;
@@ -72,7 +70,7 @@ const TotalPriceItem = styled.div`
 
 /**
  *
- * @param {{name:string, img:string, id:int, price:int, toppings:string[]}} openedItem
+ * @param {{name:string, img:string, id:int, price:int, toppings:string[], choices:string[]}} openedItem
  * @param setOpenedItem
  * @param addOrderItem
  * @returns {JSX.Element}
@@ -85,15 +83,16 @@ export default function ItemModal(
     addOrderItem
   }) {
 
-  const counter = useItemCount();
-  const toppingsHub = useToppings(openedItem);
+  const counterHook = useItemCount();
+  const toppingsHook = useToppings(openedItem);
+  const choicesHook = useChoices(openedItem);
 
-  // const order = {
-  //   item: openedItem,
-  //   count: counter.itemCount,
-  // };
-
-  const orderItem = new OrderItem(openedItem, counter.itemCount, toppingsHub.toppings);
+  const orderItem = new OrderItem(
+    openedItem,
+    counterHook.itemCount,
+    toppingsHook.toppings,
+    choicesHook.choice
+  );
 
   const addToOrder = () => {
     addOrderItem(orderItem);
@@ -106,17 +105,26 @@ export default function ItemModal(
         <Modal onClick={(ev) => ev.stopPropagation()}>
           <Banner src={openedItem.img} />
           <Container>
+
             <OffsetBlock>
-              <SuccessButton onClick={addToOrder}>Добавить</SuccessButton>
+              <SuccessButton
+                onClick={addToOrder}
+                disabled={openedItem.choices && !orderItem.choice}
+              >Добавить</SuccessButton>
             </OffsetBlock>
+
             <div className="item-modal-info">
               <h3>{openedItem.name}</h3>
               <h3>{toLocalePrice(openedItem.price)}</h3>
             </div>
 
-            <ItemCount {...counter} />
+            <ItemCount {...counterHook} />
 
-            {openedItem.toppings && <ToppingsList {...toppingsHub} />}
+            {openedItem.toppings &&
+            <ToppingsList {...toppingsHook} />}
+
+            {openedItem.choices &&
+            <Choices {...choicesHook} openedItem={openedItem} />}
 
             <TotalPriceItem>
               <span>Итого:</span>

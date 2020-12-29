@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { toLocalePrice } from "../utils/helpers";
+import { toLocalePrice } from "../../utils/helpers";
 
 const List = styled.ul`
   display: flex;

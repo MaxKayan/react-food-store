@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { baseButton } from "../utils/styledComponents";
+import { baseButton } from "../../utils/styledComponents";
 
 const addBtnColor = "#06ce06";
 const addBtnColorDark = "#04ae04";
@@ -31,6 +31,12 @@ const StyledButton = styled(baseButton)`
   :hover {
     border: ${addBtnBorderWidth} solid ${addBtnColor};
     box-shadow: 0 0 20px 0 ${addBtnColor};
+  }
+  
+  :disabled {
+    background-color: gray;
+    box-shadow: none;
+    cursor: auto;
   }
 `;
 

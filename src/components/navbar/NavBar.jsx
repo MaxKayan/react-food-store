@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import { Tooltip } from "..";
+import { Tooltip } from "../index";
 
 const NavBarStyled = styled.header`
   position: fixed;

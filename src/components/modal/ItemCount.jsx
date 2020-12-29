@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { clampValue } from "../utils/helpers";
-import { baseButton } from "../utils/styledComponents";
+import { clampValue } from "../../utils/helpers";
+import { baseButton } from "../../utils/styledComponents";
 
 const CountWrapper = styled.div`
   display: flex;
